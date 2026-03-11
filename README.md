@@ -8,7 +8,7 @@ Telecom billing is unique. You have flat monthly subscriptions on one side, and 
 Instead of just reading about it, I decided to build a simulation. I visited Maqsam's website, looked at their pricing model, generated my own realistic dataset, and set out to solve the exact kinds of daily problems a data team would face there. It was a great way for me to dive deep into the telecom domain and put my analytical skills to a real-world test.
 
 ## ⚙️ How I Modeled the Data (Business Assumptions)
-To make this as close to reality as possible, I wrote a Python script (`generat_data.ipynb`) to generate the data from scratch. I applied the following business rules based on my understanding of the CCaaS model:
+To make this as close to reality as possible, I wrote a Python script (`generate_data.ipynb`) to generate the data from scratch. I applied the following business rules based on my understanding of the CCaaS model:
 
 * **The 2,000 Free Minutes Rule:** Every account gets 2,000 free inbound minutes per month. The financial analysis strictly accounts for this, only calculating costs and revenues after this threshold is passed.
 * **The Rate Card:** I built a dual-cost system. Every call has a `rate_price` (what the customer pays us) and a `rate_cost` (what the telecom carrier charges us). I intentionally added some scenarios where the carrier cost is higher than the customer price to see if my analysis could catch the "negative margin" leak.
@@ -30,7 +30,7 @@ pip install pandas duckdb pyarrow faker jupyter
 ```
 
 ## 📂 Project Structure
-`generat_data.ipynb`: The script that builds the fake customers and call logs based on the assumptions above.
+`generate_data.ipynb`: The script that builds the fake customers and call logs based on the assumptions above.
 
 `dim_customers.parquet & fact_calls.parquet `: The generated data files.
 
@@ -52,6 +52,6 @@ Inside the notebook, I answered four main business questions:
 ## 🚀 How to Run It
 Clone this repository to your machine.
 
-**(Optional)** Run python generate_telecom_data.py if you want to generate a new set of random data.
+**(Optional)** Run python generate_data.ipynb if you want to generate a new set of random data.
 
 Open profitability_analysis.ipynb and run the cells. DuckDB will query the Parquet files directly.
