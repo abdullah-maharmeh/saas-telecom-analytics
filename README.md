@@ -8,7 +8,7 @@ Telecom billing is unique. You have flat monthly subscriptions on one side, and 
 Instead of just reading about it, I decided to build a simulation. I visited Maqsam's website, looked at their pricing model, generated my own realistic dataset, and set out to solve the exact kinds of daily problems a data team would face there. It was a great way for me to dive deep into the telecom domain and put my analytical skills to a real-world test.
 
 ## ⚙️ How I Modeled the Data (Business Assumptions)
-To make this as close to reality as possible, I wrote a Python script (`generate_telecom_data.py`) to generate the data from scratch. I applied the following business rules based on my understanding of the CCaaS model:
+To make this as close to reality as possible, I wrote a Python script (`generat_data.ipynb`) to generate the data from scratch. I applied the following business rules based on my understanding of the CCaaS model:
 
 * **The 2,000 Free Minutes Rule:** Every account gets 2,000 free inbound minutes per month. The financial analysis strictly accounts for this, only calculating costs and revenues after this threshold is passed.
 * **The Rate Card:** I built a dual-cost system. Every call has a `rate_price` (what the customer pays us) and a `rate_cost` (what the telecom carrier charges us). I intentionally added some scenarios where the carrier cost is higher than the customer price to see if my analysis could catch the "negative margin" leak.
@@ -21,7 +21,7 @@ I used a modern data engineering stack to ensure the queries run fast and the fi
 * **Data Generation:** Python (Pandas, Faker)
 * **Storage Engine:** Parquet (for columnar storage and fast reading)
 * **Compute Engine:** DuckDB (for fast, in-memory SQL execution)
-* **Analysis & Presentation:** Jupyter Notebook
+* **Analysis & Presentation:** Jupyter Notebook & PowerBi
 
 ### Installation
 To run the code yourself, you will need to install these libraries:
@@ -30,11 +30,13 @@ pip install pandas duckdb pyarrow faker jupyter
 ```
 
 ## 📂 Project Structure
-`generate_telecom_data.py`: The script that builds the fake customers and call logs based on the assumptions above.
+`generat_data.ipynb`: The script that builds the fake customers and call logs based on the assumptions above.
 
 `dim_customers.parquet & fact_calls.parquet `: The generated data files.
 
 `profitability_analysis.ipynb` : The Jupyter Notebook containing the actual SQL queries and insights.
+
+`maqsam dashboard.pdf` : The PDF copy for an interactive PowerBi dashboard 
 
 ## 📊 The 4 Pillars of Analysis
 Inside the notebook, I answered four main business questions:
